@@ -7,9 +7,9 @@ Vue.use(Vuex)
 
 let books = new Map();
 books.set('201910', {
-    'park': { userName: 'park', bookTitle: '201910', bookThumbnail: 'book1', bookUrl: 'http://www.naver.com' },
+    'park': { userName: 'park', bookTitle: '201911', bookThumbnail: 'book1', bookUrl: 'http://www.naver.com' },
     'ryu': { userName: 'ryu', bookTitle: '201910', bookThumbnail: 'book2', bookUrl: 'http://www.naver.com' },
-    'lee': { userName: 'lee', bookTitle: '201910', bookThumbnail: 'book3', bookUrl: 'http://www.naver.com' }
+    'lee': { userName: 'lee', bookTitle: '201911', bookThumbnail: 'book3', bookUrl: 'http://www.naver.com' }
 })
 
 books.set('201909', {
@@ -67,31 +67,34 @@ export default new Vuex.Store({
             return state.month = payload
         },
 
-        updateBook: function(state, payload) {
+        updateBook: function (state, payload) {
 
-            // console.log("store updateBook state : ")
-            // console.log(state)
-            // console.log("store updateBook item : ") 
-            // console.log(item)
-            // console.log("store updateBook monthKey ")
-            // console.log(monthKey)
-            // console.log(123123123)
-            // console.log("state : month")
-
-            var a = state.month.split('-').join('')
+            // var a = state.month.split('-').join('')
             // console.log("aaaaaaaa")
             // console.log(a)
 
-            var b = state.books.get(a)
-            console.log('bbbbbb')
-            console.log(b)
+            // var b = state.books.get(a)
+            // console.log('bbbbbb')
+            // console.log(b)
 
-            console.log("state : item")
-            console.log(payload)
+            // console.log("state : item")
+            // console.log(payload)
 
             // b.set(a, payload)
+            // console.log(state)
 
+            // return state.books = payload
 
+            // console.log(payload);
+            let books = state.books.get(payload.month);
+            
+            books[payload.userName].bookTitle = payload.bookTitle;
+
+            // books[payload].objKey = (element) => console.log(element.userName)
+
+            // console.log(books[payload.userName]);
+            state.books.set(payload.month, books);
+            console.log(state.books);
 
             // console.log('store edited book data pyaload :: ' + payload)
         }

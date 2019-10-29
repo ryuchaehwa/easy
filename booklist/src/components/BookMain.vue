@@ -40,6 +40,8 @@
 <script>
 /* eslint-disable no-console */
 
+// var aa = this.$store.getters.getBooks
+
 export default {
   name: "BookMain",
 
@@ -64,7 +66,8 @@ export default {
       //   let m = month.toString()
       //   console.log('BookMain computed: Month ' + m)
       //   let a = books.get(month);
-
+    //   console.log('computed books')
+    //   console.log(this.$store.getters.getBooks)
       return this.$store.getters.getBooks;
     },
 
@@ -75,11 +78,16 @@ export default {
 
   methods: {
     save: function(book, event) {
-        console.log('bookkkkkkkk')
-         console.log(book);
+        // console.log('bookkkkkkkk')
+        //  console.log(book);
 
       // var m = this.month
       // console.log(m)
+
+      var objForKeys = this.$store.getters.getBooks
+      var keys = Object.keys(objForKeys)
+
+      console.log(keys)
 
       if (event.keyCode === 13) {
         var monthKey = document.getElementById("m").value;
@@ -90,20 +98,23 @@ export default {
         var editedBookUrl = book.bookUrl;
 
         var item = new Object();
+        item.month = monthKey
         item.userName = editedUsername;
         item.bookTitle = editedBookTitle;
         item.bookThumbnail = editeBookThumbnail;
         item.bookUrl = editedBookUrl;
 
+        // console.log('itemitemitemitemitemitemitemitemitemitem')
         // console.log(item)
 
-        this.$store.commit("updateBook", item, monthKey);
+        this.$store.commit("updateBook", item);
       }
     },
 
     getMo: function() {
       return this.$store.getters.getMonth;
-    }
+    },
+
   }
 
   //   created: function() {
