@@ -1,7 +1,10 @@
 <template>
   <v-container>
     <!-- <v-btn @click="getBooks">get book list</v-btn> -->
-    <h1>v - simeple - table</h1>
+    <h1>computed - {{getM}}</h1>
+    <h1>data - {{month}}</h1>
+    <h1>method - {{getMo()}}</h1>
+    <input type="hidden" :value="getM" id="m">
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -18,18 +21,19 @@
             <td>
               <input
                 type="text"
+                :class="setCss.textAlign"
                 :value="book.bookTitle"
-                @click="getUser(book, $event)"
-                @keyup="save"
+                @keyup="save(book, $event)"
               />
             </td>
             <td>{{book.bookThumbnail}}</td>
-            <td>{{book.bookUrl}}</td>
+            <td>
+              <a :href="book.bookUrl">link</a>
+            </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
-    <v-btn @click="save">save</v-btn>
   </v-container>
 </template>
 
@@ -44,12 +48,12 @@ export default {
   components: {},
 
   data() {
+    //   console.log(this.$store.getters.getMonth)
     return {
-      month: "",
+      month: this.$store.getters.getMonth,
       setCss: {
         textAlign: "text-center"
-      },
-      editBookTItle: null
+      }
     };
   },
 
@@ -62,45 +66,67 @@ export default {
       //   let a = books.get(month);
 
       return this.$store.getters.getBooks;
-    }
+    },
 
-    // getMonth: function() {
-    //     let month = this.$store.getters.getMonth;
-    //     console.log('BookMain: computed ' + month)
-    //     return month;
-    // }
+    getM: function() {
+      return this.$store.getters.getMonth;
+    }
   },
 
   methods: {
-    save: function(event) {
-      event.preventDefault();
+    save: function(book, event) {
+        console.log('bookkkkkkkk')
+         console.log(book);
+
+      // var m = this.month
+      // console.log(m)
 
       if (event.keyCode === 13) {
-        console.log("event");
+        var monthKey = document.getElementById("m").value;
+        // console.log("method - save - monthKey" + monthKey);
+        var editedUsername = book.userName;
+        var editedBookTitle = event.target.value;
+        var editeBookThumbnail = book.bookThumbnail;
+        var editedBookUrl = book.bookUrl;
 
-        var a = this.getUser();
-        console.log(a);
+        var item = new Object();
+        item.userName = editedUsername;
+        item.bookTitle = editedBookTitle;
+        item.bookThumbnail = editeBookThumbnail;
+        item.bookUrl = editedBookUrl;
+
+        // console.log(item)
+
+        this.$store.commit("updateBook", item, monthKey);
       }
     },
 
-    getUser: function(book, event) {
-      var editedUsername = book.userName;
-      var editedBookTitle = event.target.value;
-      var editeBookThumbnail = book.bookThumbnail;
-      var editedBookUrl = book.bookUrl;
-
-      var item = new Object();
-      item.userName = editedUsername;
-      item.bookTitle = editedBookTitle;
-      item.bookThumbnail = editeBookThumbnail;
-      item.bookUrl = editedBookUrl;
+    getMo: function() {
+      return this.$store.getters.getMonth;
     }
-  },
+  }
 
-//   created: function() {
-//     var m = this.$store.getters.getMonth;
-//     console.log("BookMain created() " + m);
-//     this.month = m;
-//   }
+  //   created: function() {
+  //     var m = this.$store.getters.getMonth;
+  //     //   console.log("BookMain created() " + m);
+  //     this.month = m;
+  //   },
+
+  //   beforeMounted: function() {
+  //     console.log("BookMain beforeMounted");
+  //   },
+
+  //   mounted: function() {
+  //       console.log('BookMain mounted')
+  //   },
+
+  //   beforeUpdate: function() {
+  //       console.log('BookMain beforeUpdate')
+  //   },
+
+  //   update: function() {
+  //       console.log('BookMain update :')
+
+  //   },
 };
 </script>

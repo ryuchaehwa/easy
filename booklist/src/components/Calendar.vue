@@ -2,10 +2,10 @@
   <v-container>
     <v-date-picker
       :type="type"
-      v-model="currentMonth"
+      v-model="month"
       :locale="lang.ko"
       :landscape="landscape"
-      @click:month="queryMonth(currentMonth)"
+      @click:month="queryMonth(month)"
     ></v-date-picker>
   </v-container>
 </template>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       type: "month",
-      currentMonth: new Date().toISOString().substring(0, 7),
+      month: new Date().toISOString().substring(0, 7),
       lang: {
         ko: "ko"
       },
@@ -36,9 +36,9 @@ export default {
   },
 
   methods: {
-    queryMonth: function(currentMonth) {
+    queryMonth: function(month) {
       //   let queryMonth = currentMonth.split("-").join("");
-      this.$store.commit("setMonthQuery", currentMonth);
+      this.$store.commit("setMonthQuery", month);
     }
   },
 
