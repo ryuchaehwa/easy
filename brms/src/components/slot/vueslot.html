@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/vue"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ title }}
+      <com-a>
+        <template v-slot:[slot]>
+          This is the Header {{ title }}
+        </template>
+        <template v-slot:footer="{ nameInfo }">
+          {{ nameInfo.firstName }}
+        </template>
+        This is content
+      </com-a>
+    </div>
+
+    <script>
+      const ComponentA = {
+        data() {
+          return {
+            name: { firstName: "Chaehwa", lastName: "Ryu" }
+          };
+        },
+        template: `<div>
+            <header>Header
+            <slot name="header"></slot></header>
+        <footer>Footer
+            <slot name="footer1" :nameInfo="name"></slot>
+        </footer>
+        </div>`
+      };
+
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            title: "hello world",
+            slot: 'footer'
+          };
+        },
+        components: {
+          "com-a": ComponentA
+        }
+      });
+    </script>
+  </body>
+</html>

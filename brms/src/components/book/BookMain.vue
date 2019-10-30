@@ -1,22 +1,19 @@
 <template>
-<v-container>
-    BookMain
+  <v-container>
     <BookList />
-</v-container>
+  </v-container>
 </template>
 
 <script>
-import BookList from './BookList'
+import BookList from "./BookList";
 
 export default {
-    name: 'BookMain',
-    components: {
-        BookList,
-    },
-    data() {
-        return {
-
-        }
-    }
-}
+  name: "BookMain",
+  components: {
+    BookList
+  },
+  data() {
+    return {};
+  }
+};
 </script>
