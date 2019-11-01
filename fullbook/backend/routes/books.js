@@ -3,6 +3,7 @@ var router = express.Router();
 var books = require('../books.json')
 
 router.get('/', function(req, res, next) {
+    console.log(books)
     res.send(books)
 })
 

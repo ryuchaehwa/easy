@@ -1,25 +1,21 @@
 [
-    "201909", {
-        "park": { "userName": "park", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "ryu": { "userName": "ryu", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "lee": { "userName": "lee", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
-    },
+    { "id":13,  "userName": "park", "bookTitle": "201908", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+    { "id":14,  "userName": "ryu", "bookTitle": "201908", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+    { "id":15,  "userName": "lee", "bookTitle": "201908", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
 
-    "201910", {
-        "park": { "userName": "park", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "ryu": { "userName": "ryu", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "lee": { "userName": "lee", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
-    },
+        { "id":1,  "userName": "park", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":2,  "userName": "ryu", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":3,  "userName": "lee", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
 
-    "201911", {
-        "park": { "userName": "park", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "ryu": { "userName": "ryu", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "lee": { "userName": "lee", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
-    },
+        { "id":4,  "userName": "park", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":5,  "userName": "ryu", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":6,  "userName": "lee", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
 
-    "201912", {
-        "park": { "userName": "park", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "ryu": { "userName": "ryu", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
-        "lee": { "userName": "lee", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
-    }
+        { "id":7,  "userName": "park", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":8,  "userName": "ryu", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":9,  "userName": "lee", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+
+        { "id":10,  "userName": "park", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":11,  "userName": "ryu", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" },
+        { "id":12,  "userName": "lee", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com", "regDate": "201909" }
 ]
