@@ -1,0 +1,25 @@
+[
+    "201909", {
+        "park": { "userName": "park", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "ryu": { "userName": "ryu", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "lee": { "userName": "lee", "bookTitle": "201909", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
+    },
+
+    "201910", {
+        "park": { "userName": "park", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "ryu": { "userName": "ryu", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "lee": { "userName": "lee", "bookTitle": "201910", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
+    },
+
+    "201911", {
+        "park": { "userName": "park", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "ryu": { "userName": "ryu", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "lee": { "userName": "lee", "bookTitle": "201911", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
+    },
+
+    "201912", {
+        "park": { "userName": "park", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "ryu": { "userName": "ryu", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" },
+        "lee": { "userName": "lee", "bookTitle": "201912", "bookThumbnail": "book1", "bookUrl": "http://www.naver.com" }
+    }
+]
