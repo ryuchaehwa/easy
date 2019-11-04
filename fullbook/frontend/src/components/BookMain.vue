@@ -8,8 +8,6 @@
             </li>
         </ul>
 
-        
-
 
     </div>
 </template>
@@ -20,7 +18,6 @@ export default {
     name: 'BookMain',
     created() {
         this.$http.get('/api/books').then((response) => { 
-           
             this.books = response.data
              console.log(this.books)
             })
