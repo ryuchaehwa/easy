@@ -65,14 +65,14 @@ export default {
         });
 
       (this.book.user_name = ""),
-      (this.book.book_title = ""),
-      (this.book.book_url = "");
+        (this.book.book_title = ""),
+        (this.book.book_url = "");
 
       //redirect
       // if(status == 200) {
       //   self.$router.push('/')
       // }
-      this.$router.push('/')
+      this.$router.push("/");
     }
   }
 };
