@@ -20,10 +20,11 @@ db.connect((err) => {
 
 // 도서신청 리스트
 router.get('/', function(req, res, next) {
-    let month = '2019-09'
+    let month = '2019-11'
     let sql = `SELECT * FROM books WHERE reg_date LIKE '${month}%'`
     db.query(sql, (err, results) => {
         if(err) throw err;
+        console.log(err)
         console.log(results)
         res.send(results)
     })
@@ -40,6 +41,7 @@ router.post('/editbook', function(req, res) {
     let sql = `UPDATE books SET book_title = ${bookTitle} where book_no = ${bookNo}`
     db.query(sql, editBook, function(err, result) {
         if(err) throw err;
+        console.log(err)
         console.log(result)
         res.send('업데이트 완료')
     })
@@ -47,19 +49,22 @@ router.post('/editbook', function(req, res) {
 
 // 새 책 등록
 router.post('/addbook', function(req, res) {
-    let newBook = {
-        user_name: req.params.book.userName,
-        book_title: req.params.book.bookTitle,
-        book_url: req.params.book.book_url
+    console.log(123123123)
+    const newBook = {
+        'user_name' : req.body.book.user_name,
+        'book_title' : req.body.book.book_title,
+        'book_url' : req.body.book.book_url
     }
-
+    console.log(newBook)
+    console.log(3333)
     let sql = 'INSERT INTO books SET ?'
-    db.query(sql, newBOok, function(err, result) {
+    db.query(sql, newBook, function(err, result) {
         if(err) throw err;
         console.log(result)
-        res.send('추가완료')
     })
+    console.log(444)
 })
+
 
 router.get('/:user_id', function(req, res, next) {
     res.send('hahahahah')

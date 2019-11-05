@@ -35,29 +35,45 @@ export default {
     btnAdd: function() {
       // console.log(123);
 
-      let userName = this.book.user_name;
-      let bookTitle = this.book.book_title;
-      let bookUrl = this.book.book_url;
+      let user_name = this.book.user_name;
+      let book_title = this.book.book_title;
+      let book_url = this.book.book_url;
 
       let book = new Object();
+
       book = {
-        userName,
-        bookTitle,
-        bookUrl
+        user_name,
+        book_title,
+        book_url
       };
 
-      console.log(book)
+      console.log(book);
 
-      this.$http.post("/api/books/addbooks").then(response => {
-        console.log(response.data)
-      }).catch(err => {
-        console.log(err)
-      })
+      this.$http
+        .post("/api/books/addbook", {
+          book
+        })
+        .then(res => {
+          if (res.data.success == true) {
+            alert(res.data.message);
+          } else {
+            alert(res.data.message);
+          }
+        })
+        .catch(function(err) {
+          alert(err);
+        });
 
-      this.book.user_name = '',
-      this.book.book_title = '',
-      this.book.book_url = ''
-      }
+      (this.book.user_name = ""),
+      (this.book.book_title = ""),
+      (this.book.book_url = "");
+
+      //redirect
+      // if(status == 200) {
+      //   self.$router.push('/')
+      // }
+      this.$router.push('/')
+    }
   }
 };
 </script>
