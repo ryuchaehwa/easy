@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="book in books" :key="book.id">
+        <tr v-for="book in books" :key="book.book_no">
           <td>{{book.book_no}}</td>
           <td>{{book.user_name}}</td>
           <td>{{book.book_title}}</td>
@@ -31,17 +31,14 @@
         </tr>
       </tbody>
     </v-simple-table>
-    <add-book></add-book>
   </v-container>
 </template>
 
 <script>
 /* eslint-disable no-console */
-import AddBook from "./AddBook";
 
 export default {
   name: "BookMain",
-  components: { 'add-book': AddBook },
   created() {
     this.$http
       .get("/api/books")

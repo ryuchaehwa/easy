@@ -13,10 +13,8 @@ var app = express();
 var booksRouter = require('./routes/books')
 // books
 
-
 // db
 var mysql = require('mysql');
-//
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,51 +29,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
 // books
 app.use('/api/books', booksRouter)
 // books
 
 // db
-// var connection = mysql.createConnection({
-//   host: 'localhost',
-//   port: 3306,
-//   user: 'root',
-//   password: '111111',
-//   database: 'book'
-// })
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '111111',
+  database: 'book'
+})
 
-// if (!connection) {
-//   console.log('no')
-// } else {
-//   console.log('ok')
-// }
+db.connect((err) => {
+  if(err) {
+    console.log(err);
+    throw err;
+  }
+  console.log('mysql connected .......')
+})
 
-// Connect
-// connection.connect(function (err) {
-//   if (err) {
-//     console.error('mysql connection error');
-//     console.error(err);
-//     throw err;
-//   }
-// })
-
-//insert
-// app.post('/addbook', function (req, res) {
-//   var book = {
-//     'userId': req.body.userId,
-//     'userName': req.body.userName,
-//     'bookTitle': req.body.bookTitle,
-//     'bookUrl': req.body.bookUrl
-//   };
-//   var query = connection.query('insert into books set ?', book, function (err, result) {
-//     if (err) {
-//       console.log(err);
-//       throw err;
-//     }
-//     res.status(200).send('success')
+// booksRouter.get('/', (req, res) => {
+//   let sql = 'SELECT * FROM books'
+//   let query = db.query(sql, (err, results) => {
+//     if(err) throw err;
+//     console.log(results)
+//     console.log('GETTING DATA IS DONE!!')
+//     res.send(query)
 //   })
 // })
-// db
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
