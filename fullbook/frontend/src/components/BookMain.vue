@@ -31,14 +31,17 @@
         </tr>
       </tbody>
     </v-simple-table>
+    <add-book></add-book>
   </v-container>
 </template>
 
 <script>
 /* eslint-disable no-console */
+import AddBook from "./AddBook";
 
 export default {
   name: "BookMain",
+  components: { 'add-book': AddBook },
   created() {
     this.$http
       .get("/api/books")
