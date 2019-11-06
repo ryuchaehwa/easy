@@ -49,6 +49,7 @@ router.post('/editbook', function (req, res) {
         if (err) throw err;
         console.log(err)
         console.log(result)
+        res.send(result)
     })
 })
 
@@ -66,8 +67,30 @@ router.post('/addbook', function (req, res) {
     db.query(sql, newBook, function (err, result) {
         if (err) throw err;
         console.log(result)
+        res.send(result)
     })
-    console.log(444)
+    console.log(77777)
+})
+
+// 선택한 책 삭제
+router.delete('/deletebook', function(req, res) {
+    console.log(444);
+
+    const bookNo = {
+        'book_no': req.body.book.book_no
+    }
+    console.log(bookNo)
+    
+    let sql = `DELETE FROM books WHERE book_no = ${bookNo}`
+    console.log(6666)
+
+    db.query(sql, bookNo, function(err, result) {
+        if(err) throw err;
+        console.log(err)
+        console.log(result)
+        console.log(3234234)
+        res.send(result)
+    })
 })
 
 

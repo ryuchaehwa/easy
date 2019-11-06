@@ -28,7 +28,7 @@
           <th>{{book.reg_date}}</th>
           <th>
             <span>
-              <v-icon @click="btnDelete(book.book_no)">mdi-delete</v-icon>
+              <v-icon @click="btnDelete(book)">mdi-delete</v-icon>
             </span>
           </th>
         </tr>
@@ -61,8 +61,21 @@ export default {
   },
 
   methods: {
-    btnDelete(no) {
-      console.log(no);
+    btnDelete(book) {
+      // console.log(book_no);
+      let book_no = book.book_no;
+      if (confirm(book_no + " 를 삭제하시겠습니까?")) {
+        this.$http
+          .delete("/api/books/deletebook", {
+            book_no
+          })
+          .then(res => {
+            console.log(res.data);
+          })
+          .catch(err => console.log(err));
+      } else {
+        return;
+      }
     },
 
     titleEdit(book, event) {
@@ -70,23 +83,23 @@ export default {
       // console.log(event);
 
       let book_no = book.book_no;
-      console.log(book_no);
+      // console.log(book_no);
 
       if (event.keyCode === 13) {
         var book_title = event.target.value;
-        console.log(book_title);
+        // console.log(book_title);
 
-        this.$http.post('/api/books/editbook', {
-          book_title, book_no
-        }).then(res => {
-          if(res.data.success == true) {
-            console.log('okokokokokokokokok')
-          } else {
-            console.log('nonononononnonononononono')
-          }
-        }).catch(function(err) {
-          console.log(err)
-        })
+        this.$http
+          .post("/api/books/editbook", {
+            book_title,
+            book_no
+          })
+          .then(res => {
+            console.log(res.data);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       }
     }
   }
