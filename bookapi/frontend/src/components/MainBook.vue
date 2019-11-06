@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-date-picker type="month" locale="ko"></v-date-picker> <br><br>
     <v-btn to="/add">도서추가</v-btn>
     <v-simple-table>
       <thead>
@@ -13,24 +14,22 @@
       </thead>
       <tbody>
         <tr v-for="book in books" :key="book.user_id">
-          <th>{{book.user_name}}</th>
-          <th>
+          <td>{{book.user_name}}</td>
+          <td>
             <input
               type="text"
               :value="book.book_title"
               id="book_title"
               @keyup="titleEdit(book, $event)"
             />
-          </th>
-          <th>
+          </td>
+          <td>
             <a :href="book.book_url">링크</a>
-          </th>
-          <th>{{book.reg_date}}</th>
-          <th>
-            <span>
-              <v-icon @click="btnDelete(book)">mdi-delete</v-icon>
-            </span>
-          </th>
+          </td>
+          <td>{{book.reg_date}}</td>
+          <td>
+            <v-icon @click="btnDelete(book)">mdi-delete</v-icon>
+          </td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -43,8 +42,14 @@ export default {
   name: "MainBook",
 
   created() {
+
+    let params = {
+      params: {
+        period: '2019-11'
+      }
+    }
     this.$http
-      .get("/api/books")
+      .get("/api/books", params)
       .then(response => {
         this.books = response.data;
         console.log(response.data);
@@ -56,7 +61,8 @@ export default {
 
   data() {
     return {
-      books: []
+      books: [],
+      month: new Date().toISOString().substring(0, 7)
     };
   },
 
@@ -66,8 +72,10 @@ export default {
       let book_no = book.book_no;
       if (confirm(book_no + " 를 삭제하시겠습니까?")) {
         this.$http
-          .delete("/api/books/deletebook", {
-            book_no
+          .post("/api/books/delbook", {
+            book: {
+              book_no
+            }
           })
           .then(res => {
             console.log(res.data);
@@ -76,6 +84,8 @@ export default {
       } else {
         return;
       }
+
+      this.$router.go('/');
     },
 
     titleEdit(book, event) {

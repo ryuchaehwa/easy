@@ -55,37 +55,37 @@ router.post('/editbook', function (req, res) {
 
 // 새 책 등록
 router.post('/addbook', function (req, res) {
-    console.log(123123123)
     const newBook = {
         'user_name': req.body.book.user_name,
         'book_title': req.body.book.book_title,
         'book_url': req.body.book.book_url
     }
     console.log(newBook)
-    console.log(3333)
     let sql = 'INSERT INTO books SET ?'
     db.query(sql, newBook, function (err, result) {
         if (err) throw err;
         console.log(result)
         res.send(result)
     })
-    console.log(77777)
 })
 
 // 선택한 책 삭제
-router.delete('/deletebook', function(req, res) {
-    console.log(444);
-
-    const bookNo = {
-        'book_no': req.body.book.book_no
-    }
+router.post('/delbook', function (req, res) {
+    console.log(123)
+    let bookNo = req.body.book.book_no
     console.log(bookNo)
-    
+
+    let bookObj = {
+        'book_no': bookNo
+    }
+
+    console.log(bookObj)
+
     let sql = `DELETE FROM books WHERE book_no = ${bookNo}`
     console.log(6666)
 
-    db.query(sql, bookNo, function(err, result) {
-        if(err) throw err;
+    db.query(sql, bookObj, function (err, result) {
+        if (err) throw err;
         console.log(err)
         console.log(result)
         console.log(3234234)
