@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-date-picker type="month" locale="ko"></v-date-picker> <br><br>
+    <!-- <v-date-picker type="month" locale="ko" v-model="month" :click:month="changeMonth()"></v-date-picker> -->
+    <br />
+    <br />
     <v-btn to="/add">도서추가</v-btn>
     <v-simple-table>
       <thead>
@@ -42,14 +44,19 @@ export default {
   name: "MainBook",
 
   created() {
+    // let params = {
+    //   params: {
+    //     period: this.month
+    //   }
+    // };
 
-    let params = {
-      params: {
-        period: '2019-11'
-      }
-    }
     this.$http
-      .get("/api/books", params)
+      .get("/api/books", {
+        params: {
+          period: this.month
+        }
+      })
+      
       .then(response => {
         this.books = response.data;
         console.log(response.data);
@@ -85,7 +92,7 @@ export default {
         return;
       }
 
-      this.$router.go('/');
+      this.$router.go("/");
     },
 
     titleEdit(book, event) {
@@ -111,7 +118,18 @@ export default {
             console.log(err);
           });
       }
-    }
+    },
+
+    // changeMonth() {
+    //   let now = this.month;
+    //   console.log(now);
+    //   this.$http
+    //     .get("/", now)
+    //     .then(response => {
+    //       this.books = response.data
+    //     })
+    //     .catch(err => console.log(err));
+    // }
   }
 };
 </script>

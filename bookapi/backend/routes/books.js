@@ -20,7 +20,11 @@ db.connect((err) => {
 
 // 도서신청 리스트
 router.get('/', function (req, res, next) {
-    let month = '2019-11'
+
+    let month = req.param.params.period
+    console.log(month)
+
+    // let month = '2019-11'
     let sql = `SELECT * FROM books WHERE reg_date LIKE '${month}%'`
     db.query(sql, (err, results) => {
         if (err) throw err;
@@ -54,7 +58,7 @@ router.post('/editbook', function (req, res) {
 })
 
 // 새 책 등록
-router.post('/addbook', function (req, res) {
+router.post('/', function (req, res) {
     const newBook = {
         'user_name': req.body.book.user_name,
         'book_title': req.body.book.book_title,
