@@ -50,7 +50,7 @@ export default {
       console.log(book);
 
       this.$http
-        .post("/", {
+        .post("/api/books", {
           book
         })
         .then(res => {

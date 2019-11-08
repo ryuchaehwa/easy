@@ -21,21 +21,23 @@ db.connect((err) => {
 // 도서신청 리스트
 router.get('/', function (req, res, next) {
 
-    let month = req.param.params.period
-    console.log(month)
+    // console.log(req)
+     let month = req.query.period
+    // console.log("this is monthhhhhhh" + month)
 
-    // let month = '2019-11'
     let sql = `SELECT * FROM books WHERE reg_date LIKE '${month}%'`
     db.query(sql, (err, results) => {
-        if (err) throw err;
-        console.log(err)
+        if(err) {
+            console.log(err)
+            throw err
+        }
         console.log(results)
         res.send(results)
     })
 })
 
 // 책 제목 수정
-router.post('/editbook', function (req, res) {
+router.put('/', function (req, res) {
 
     console.log(55555)
 
@@ -74,21 +76,16 @@ router.post('/', function (req, res) {
 })
 
 // 선택한 책 삭제
-router.post('/delbook', function (req, res) {
-    console.log(123)
-    let bookNo = req.body.book.book_no
-    console.log(bookNo)
-
-    let bookObj = {
-        'book_no': bookNo
-    }
-
-    console.log(bookObj)
+router.delete('/', function (req, res) {
+    // console.log(123)
+    console.log(req.body)
+    let bookNo = req.body.book_no
+    console.log("Book No = " + bookNo)
 
     let sql = `DELETE FROM books WHERE book_no = ${bookNo}`
     console.log(6666)
 
-    db.query(sql, bookObj, function (err, result) {
+    db.query(sql, bookNo, function (err, result) {
         if (err) throw err;
         console.log(err)
         console.log(result)

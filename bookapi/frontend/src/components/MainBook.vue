@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <!-- <v-date-picker type="month" locale="ko" v-model="month" :click:month="changeMonth()"></v-date-picker> -->
+    <v-date-picker type="month" locale="ko" v-model="month" @click:month="changeMonth"></v-date-picker>
     <br />
     <br />
     <v-btn to="/add">도서추가</v-btn>
@@ -44,19 +44,15 @@ export default {
   name: "MainBook",
 
   created() {
-    // let params = {
-    //   params: {
-    //     period: this.month
-    //   }
-    // };
+    let params = {
+      params: {
+        period: this.month
+      }
+    };
 
     this.$http
-      .get("/api/books", {
-        params: {
-          period: this.month
-        }
-      })
-      
+      .get("/api/books", params)
+
       .then(response => {
         this.books = response.data;
         console.log(response.data);
@@ -79,9 +75,9 @@ export default {
       let book_no = book.book_no;
       if (confirm(book_no + " 를 삭제하시겠습니까?")) {
         this.$http
-          .post("/api/books/delbook", {
-            book: {
-              book_no
+          .delete("/api/books", {
+            data: {
+              book_no: book.book_no
             }
           })
           .then(res => {
@@ -107,7 +103,7 @@ export default {
         // console.log(book_title);
 
         this.$http
-          .post("/api/books/editbook", {
+          .put("/api/books/", {
             book_title,
             book_no
           })
@@ -120,16 +116,16 @@ export default {
       }
     },
 
-    // changeMonth() {
-    //   let now = this.month;
-    //   console.log(now);
-    //   this.$http
-    //     .get("/", now)
-    //     .then(response => {
-    //       this.books = response.data
-    //     })
-    //     .catch(err => console.log(err));
-    // }
+    changeMonth: function() {
+      let now = this.month;
+      console.log(now);
+      this.$http
+        .get("/", now)
+        .then(response => {
+          this.books = response.data
+        })
+        .catch(err => console.log(err));
+    }
   }
 };
 </script>
