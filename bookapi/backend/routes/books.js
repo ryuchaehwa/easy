@@ -22,12 +22,12 @@ db.connect((err) => {
 router.get('/', function (req, res, next) {
 
     // console.log(req)
-     let month = req.query.period
+    let month = req.query.period
     // console.log("this is monthhhhhhh" + month)
 
     let sql = `SELECT * FROM books WHERE reg_date LIKE '${month}%'`
     db.query(sql, (err, results) => {
-        if(err) {
+        if (err) {
             console.log(err)
             throw err
         }
@@ -39,7 +39,7 @@ router.get('/', function (req, res, next) {
 // 책 제목 수정
 router.put('/', function (req, res) {
 
-    console.log(55555)
+    // console.log(55555)
 
     let bookNo = req.body.book_no
     let bookTitle = req.body.book_title
@@ -48,7 +48,7 @@ router.put('/', function (req, res) {
         'book_no': bookNo,
         'book_title': bookTitle
     }
-    console.log(editBook)
+    // console.log(editBook)
 
     let sql = `UPDATE books SET book_title = '${bookTitle}' where book_no = ${bookNo}`
     db.query(sql, editBook, function (err, result) {
@@ -78,9 +78,9 @@ router.post('/', function (req, res) {
 // 선택한 책 삭제
 router.delete('/', function (req, res) {
     // console.log(123)
-    console.log(req.body)
+    // console.log(req.body)
     let bookNo = req.body.book_no
-    console.log("Book No = " + bookNo)
+    // console.log("Book No = " + bookNo)
 
     let sql = `DELETE FROM books WHERE book_no = ${bookNo}`
     console.log(6666)
@@ -95,8 +95,24 @@ router.delete('/', function (req, res) {
 })
 
 
-router.get('/:user_id', function (req, res, next) {
-    res.send('hahahahah')
+router.get('/', function (req, res, next) {
+    console.log(req)
+    // console.log(575757575757575757575757575757)
+    // res.send('hahahahah')
+
+    let period = req.params.params.period
+    // console.log(period)
+
+    let sql = `SELECT *  FROM books WHERE reg_date LIKE '${period}'`
+    db.query(sql, function (err, results) {
+        if (err) {
+            console.log(err);
+            throw err
+        }
+
+        console.log(result)
+        res.send(result)
+    })
 })
 
 

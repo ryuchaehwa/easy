@@ -19,6 +19,7 @@
           <td>{{book.user_name}}</td>
           <td>
             <input
+              refs="book_title"
               type="text"
               :value="book.book_title"
               id="book_title"
@@ -103,26 +104,35 @@ export default {
         // console.log(book_title);
 
         this.$http
-          .put("/api/books/", {
+          .put("/api/books", {
             book_title,
             book_no
           })
           .then(res => {
             console.log(res.data);
+            
+          //this.$refs.book_title 
+
           })
           .catch(function(err) {
             console.log(err);
           });
+
       }
     },
 
     changeMonth: function() {
-      let now = this.month;
-      console.log(now);
+      let params = {
+        params: {
+          period: this.month
+        }
+      };
+      // console.log(now);
       this.$http
-        .get("/", now)
+        .get("/api/books", params)
         .then(response => {
-          this.books = response.data
+          this.books = response.data;
+          console.log(response.data);
         })
         .catch(err => console.log(err));
     }
