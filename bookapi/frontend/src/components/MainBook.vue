@@ -18,13 +18,7 @@
         <tr v-for="book in books" :key="book.user_id">
           <td>{{book.user_name}}</td>
           <td>
-            <input
-              refs="book_title"
-              type="text"
-              :value="book.book_title"
-              id="book_title"
-              @keyup="titleEdit(book, $event)"
-            />
+            <input ref="bt" type="text" :value="book.book_title" @blur="titleEdit(book, $event)" />
           </td>
           <td>
             <a :href="book.book_url">링크</a>
@@ -36,6 +30,31 @@
         </tr>
       </tbody>
     </v-simple-table>
+    <v-btn @click="showRefs">showRefs</v-btn>
+
+    <!-- //confirm -->
+
+    <v-dialog v-model="dialog" width="500">
+      <template v-slot:activator="{ on }">
+        <!-- <v-icon v-on="on" @click="btnDelete(book)">mdi-delete</v-icon> -->
+        <v-icon v-on="on">mdi-delete</v-icon>
+        <!-- <v-btn color="red lighten-2" dark v-on="on">Click Me</v-btn> -->
+      </template>
+
+      <v-card>
+        <v-card-title class="headline grey lighten-2" primary-title>데이터 삭제</v-card-title>
+
+        <v-card-text>선택하신 데이터를 삭제하시겠습니까?</v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="dialog = false">취소</v-btn>
+          <v-btn color="green darken-1" text @click="btnDelete(book)">삭제</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -61,35 +80,74 @@ export default {
       .catch(err => {
         console.log(err);
       });
+
+    console.log(this.$refs["bt"]);
   },
 
   data() {
     return {
       books: [],
-      month: new Date().toISOString().substring(0, 7)
+      month: new Date().toISOString().substring(0, 7),
+      // ok: function() {},
+      // no: function() {},
+      // visible: false
+      dialog: false
     };
   },
 
   methods: {
-    btnDelete(book) {
+    async btnDelete(book) {
       // console.log(book_no);
-      let book_no = book.book_no;
-      if (confirm(book_no + " 를 삭제하시겠습니까?")) {
-        this.$http
-          .delete("/api/books", {
-            data: {
-              book_no: book.book_no
-            }
-          })
-          .then(res => {
-            console.log(res.data);
-          })
-          .catch(err => console.log(err));
-      } else {
-        return;
-      }
+      console.log(book);
 
-      this.$router.go("/");
+      // this.$confirm('hahahahah vueify confirm test').then(res => {
+      //   console.log(res + 'abcdefg')
+      // })
+
+      let book_no = book.book_no;
+
+      const res = await this.$confirm(book_no + " 를 삭제하시겠습니까?")
+      if(res) {
+        this.$http.delete("/api/books", {
+          data: {
+            book_no: book.book_no
+          }
+        }).then(res => {
+          console.log(res.data);
+        }).catch(err => console.log(err))
+      }
+  
+        // this.$confirm(book_no + " 를 삭제하시겠습니까?").then(res => {
+        //   console.log(res);
+        //   if (res) {
+        //     this.$http
+        //       .delete("/api/books", {
+        //         data: {
+        //           book_no: book.book_no
+        //         }
+        //       })
+        //       .then(res => {
+        //         console.log(res.data);
+        //       })
+        //       .catch(err => console.log(err));
+        //   }n
+        // })
+      
+        //   this.$http
+        //     .delete("/api/books", {
+        //       data: {
+        //         book_no: book.book_no
+        //       }
+        //     })
+        //     .then(res => {
+        //       console.log(res.data);
+        //     })
+        //     .catch(err => console.log(err));
+        // } else {
+        //   return;
+        // }
+        // this.dialog = false;
+        this.$router.go("/");
     },
 
     titleEdit(book, event) {
@@ -99,7 +157,7 @@ export default {
       let book_no = book.book_no;
       // console.log(book_no);
 
-      if (event.keyCode === 13) {
+      // if (event.keyCode === 13) {
         var book_title = event.target.value;
         // console.log(book_title);
 
@@ -110,15 +168,14 @@ export default {
           })
           .then(res => {
             console.log(res.data);
-            
-          //this.$refs.book_title 
-
           })
           .catch(function(err) {
             console.log(err);
           });
 
-      }
+        //  this.$refs["book_title"].blur()
+        // this.$refs.book_title
+      // }
     },
 
     changeMonth: function() {
@@ -135,7 +192,37 @@ export default {
           console.log(response.data);
         })
         .catch(err => console.log(err));
+      console.log(this.$refs["bt"]);
+    },
+
+    showRefs: function() {
+      console.log("function showRefs:: " + this.$refs.bt + " asdfasdfasdf ");
     }
+
+    //confirm
+    // del() {
+    //   this.openConfirm()
+    //     .then(() => {
+    //       // 삭제 로직
+    //       this.btnDelete
+    //       console.log("삭제됨");
+    //       this.visible = false;
+    //     })
+    //     .catch(() => {
+    //       // 취소 했을 경우
+    //       console.log("삭제취소");
+    //       this.visible = false;
+    //     });
+    // },
+
+    // openConfirm() {
+    //   this.visible = true;
+
+    //   return new Promise(function(resolve, reject) {
+    //     console.log(123123123123123123123)
+    //     console.log(resolve + reject)
+    //   });
+    // }
   }
 };
 </script>
