@@ -1,60 +1,50 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+    <v-main>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-">
+        <a href="#" class="navbar-brand">LeafletTest</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <!-- <router-link to="/" class="router-link">Main</router-link>
+              <router-link to="/main-map" class="router-link">Main Map</router-link> -->
+              <span @click="go('/')" class="router-link">Main</span>
+              <span @click="go('/main-map')" class="router-link">Main Map</span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div>
+        <router-view></router-view>
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    HelloWorld,
   },
 
   data: () => ({
     //
   }),
+
+  methods: {
+    go(routerLink) {
+      console.log('router link', routerLink)
+      this.$router.push(routerLink)
+    }
+  }
 };
 </script>
+
+<style>
+  .router-link {
+    margin-right: 20px;
+    color: white;
+    text-decoration-color: white;
+  }
+</style>
